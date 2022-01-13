@@ -5,8 +5,16 @@ class Annonce:
         self.ville=ville
         self.prix=prix
         self.date=date
+        
+        if self.prix.endswith('DH'):
+            self.prix=self.prix[ :-1][ :-1]
+        else:
+            pass
+        
+        
 
     def toDict(self):
+        
         dict={}
         dict['titre']=self.titre
         dict['ville'] = self.ville
@@ -16,4 +24,3 @@ class Annonce:
         return dict
     def show(self):
         print(self.toDict())
-        
