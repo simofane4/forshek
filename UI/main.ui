@@ -191,10 +191,36 @@ selection-color: rgb(0, 0, 127)</string>
    </property>
    <property name="styleSheet">
     <string notr="true">font: 75 italic 9pt &quot;Arial&quot;
-rgb(0, 0, 127)</string>
+                    rgb(0, 0, 127)</string>
    </property>
    <property name="text">
     <string>Exporter vers un fichier csv </string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="page2">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>2</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>PAGE2</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="page3">
+   <property name="geometry">
+    <rect>
+     <x>91</x>
+     <y>2</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>PAGE3</string>
    </property>
   </widget>
  </widget>

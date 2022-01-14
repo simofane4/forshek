@@ -27,10 +27,23 @@ session = sessionmaker(bind=engine)
 Base.metadata.create_all(engine)
 session=session()
 
-
+class ModelAvito(Base):
+    __tablename__ = "avito"
+    id = Column(Integer, primary_key=True,autoincrement=True)
+    phone = Column(String(200))
+    titre = Column(String(200))
+    ville=Column(String(200))
+    prix = Column(String(30))
+    date=Column(String(200))
+    
+session = sessionmaker(bind=engine)
+Base.metadata.create_all(engine)
+session=session()
 def add_to_db(annonces):
     for annonce in annonces:
                 field = ModelAnnonces()
+                
+                
                 field_titre = [r.titre for r in session.query(ModelAnnonces.titre)]
                 field_prix = [r.prix for r in session.query(ModelAnnonces.prix)]
                 field_ville = [r.ville for r in session.query(ModelAnnonces.ville)]
@@ -47,9 +60,19 @@ def add_to_db(annonces):
                     session.commit()
                     print('hada  li bedelti !!!!!')
                     
-                    
                 session.close()
+                
+                
+table = ModelAvito()
+table.phone = 'A'
+table.titre = 'A'
+table.ville= 'A'
+table.prix = "A"
+table.date='A'
 
 
 
 
+session.add(table)
+session.commit()
+session.close()
