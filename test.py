@@ -96,5 +96,4 @@ def alimentatiom():
                                              phone=y, titre=x[1], ville=x[2], prix=dirham(x[3]), date=x[4])
         connection.execute(query)
         print(query)
- 
 alimentatiom()

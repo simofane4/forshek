@@ -67,3 +67,8 @@ def listville():
     for i in results:
         list1.append(i[0])
     return list1
+print(listville())
+
+
+
+

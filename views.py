@@ -14,6 +14,7 @@ import csv
 from moyen_price import list_des_marque as marques , moyen_du_prix
 from main import reload_data
 import sqlalchemy as db
+from sendmail import send_annonces
 
 
 myFile = open("annon.csv", "a", newline="", encoding='UTF-8')
@@ -133,10 +134,12 @@ class Page3(QDialog):
     def __init__(self):
         super(Page3, self).__init__()
         loadUi('UI/page3.ui', self)
+        self.listville.addItems(listville())
         self.input1
         self.input2
+        
         self.input3
-        self.listville.addItems(listville())
+        
         
         self.main.clicked.connect(self.back_to_main)
         self.page2.clicked.connect(self.back_to_page2)
@@ -171,11 +174,19 @@ class Page3(QDialog):
         sql = "SELECT * FROM avito WHERE prix >= '%s' AND prix <='%s' AND ville ='%s' " % (min, max, choixville,)
         result = connection.execute(sql)
         
-        
+        listtup = []
         for i in result:
-            for  item in i:
-                textmail= "".join('' + str(item[0]))
-        print(textmail)
+            
+            listtup.append(i)
+        print(listtup)
+        with open('mail.txt', 'w') as fp:
+            fp.truncate(0) 
+            fp.write('\n'.join('{}   {}  {}  {}   {} '.format(x[1],x[2],x[3],x[4],x[5]) for x in listtup))
+            fp.close()
+        with open ("mail.txt", "r") as myfile:
+            data=myfile.read()
+            receiver = self.input3.text()
+            send_annonces(receiver, data)
         
         
     def back_to_main(self):
