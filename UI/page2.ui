@@ -84,19 +84,15 @@ rgb(0, 0, 127)
             </column>
             <column>
                 <property name="text">
-                    <string>nombre d'annonces</string>
+                    <string>Annonces</string>
                 </property>
             </column>
             <column>
                 <property name="text">
-                    <string> moyen de prix</string>
+                    <string>Moyen de Prix</string>
                 </property>
             </column>
-            <column>
-                <property name="text">
-                    <string>Date</string>
-                </property>
-            </column>
+   
         </widget>
         <widget class="QToolButton" name="toolButton">
             <property name="geometry">
@@ -111,7 +107,7 @@ rgb(0, 0, 127)
                 <string>OK</string>
             </property>
         </widget>
-        <widget class="QComboBox" name="comboBox">
+        <widget class="QComboBox" name="combo_list_des_marque">
             <property name="geometry">
                 <rect>
                     <x>36</x>

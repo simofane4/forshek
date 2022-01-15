@@ -1,18 +1,11 @@
 from sqlalchemy import Column, String, Integer, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, create_session
-
+import sqlalchemy as db
 
 engine = create_engine('sqlite:///database.db')
 Base = declarative_base()
 
-
-annonces = [{'titre': 'Samsung Galaxy A12 128-4go', 'ville': 'Casablanca', 'prix': '1 650 DH', 'date': '27 Décembre'},    
-            {'titre': 'Samsung galaxy S21 5G 256-8go', 'ville': 'Casablanca', 'prix': '7 100 DH', 'date': '27 Décembre'},
-            {'titre': 'Samsung Galaxy A72 256/8Go', 'ville': 'Casablanca', 'prix': '4 300 DH', 'date': '21 Décembre'},
-            {'titre': '6s à vendre très bon état ', 'ville': 'Fès', 'prix': '750 DH', 'date': '12 Décembre'},
-            {'titre': 'Samsung Galaxy A03s 64Go 4Go RAM', 'ville': 'Casablanca', 'prix': '1 399 DH', 'date': '26 Novembre'},
-            {'titre': 'SAMSUNG S9 NOIR 64 Go avec Carte SD 16 Go', 'ville': 'Casablanca', 'prix': '10 DH', 'date': '24 Août'},]
 
 class ModelAnnonces(Base):
     __tablename__ = "annonces"
@@ -23,9 +16,7 @@ class ModelAnnonces(Base):
     date=Column(String(200))
     
 
-session = sessionmaker(bind=engine)
-Base.metadata.create_all(engine)
-session=session()
+
 
 class ModelAvito(Base):
     __tablename__ = "avito"
@@ -39,6 +30,9 @@ class ModelAvito(Base):
 session = sessionmaker(bind=engine)
 Base.metadata.create_all(engine)
 session=session()
+
+
+
 def add_to_db(annonces):
     for annonce in annonces:
                 field = ModelAnnonces()
@@ -62,4 +56,14 @@ def add_to_db(annonces):
                     
                 session.close()
                 
-                
+engine = create_engine('sqlite:///database.db')
+connection = engine.connect()
+metadata = db.MetaData()
+tabe_avito = db.Table('avito', metadata, autoload=True, autoload_with=engine)
+
+def listville():
+    results = connection.execute(db.select([tabe_avito.columns.ville.distinct()]).order_by(db.asc(tabe_avito.columns.ville))).fetchall()
+    list1 = []
+    for i in results:
+        list1.append(i[0])
+    return list1
