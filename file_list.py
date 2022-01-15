@@ -1,8 +1,87 @@
-marque = ['13 Pro Max', 
-          '17 iphones non testés',
-          '2', 'A', 'Appareil téléphonique', 'Apple IPad/Galaxy S20plus/IPhone', 'Apple Watch série 6', 'Apple Watch série 6 - 44MM', 'Chargeur induction belkin 10 w', 'Des cartes mère', 'Des iphones 13 pro max 128 gb', 'GO PRO 9', 'Huawei', 'Huawei Mate 10 Lite', 'Huawei P30', 'Huawei p smart', 'I phone 12 pro', 'INFINIX HOT 9 PLAY', 'IPHONE', 'IPHONE 12 PRO MAX', 'IPHONE 8 64 G', 'IPhone 12', 'IPhone 12 pro', 'IPhone 6', 'IPhone 6 128 Go', 'Infinix Hot 10 Play', 'Infinix Note 2 X600', 'Infinix hot 10', 'Infinix note 4 pro', 'Infinix zéro 5 pro', 'Iphone', 'Iphone 11', 'Iphone 11 64g', 'Iphone 11 Pro Max', 'Iphone 11 pro 
-128 G', 'Iphone 11 pro max', 'Iphone 12 Pro Max', 'Iphone 12 mini', 'Iphone 12 mini 128 GB', 'Iphone 12 pro max/12 pro/watch active/tabs7 s', 'Iphone 13', 'Iphone 13 & Iphone 13 mini', 'Iphone 13 256 G', 'Iphone 13 Pro Max', 'Iphone 13 normal 256 G bleu et noir', 
-'Iphone 13 pro Gold 256 G', 'Iphone 13 pro max', 'Iphone 6 gris', 'Iphone 7', 'Iphone 8', 'Iphone 8 plus', 'Iphone XR', 'J’ai 4 iPhone', 'MacBook PRO/Apple watch 3/série 5 et série 6 s', 'Montre connectée', 'Nokia Huawei', 'Note 10 plus', 'Note 9', 'Note20 ultra', 'Offre', 'Oppo 9 2020', 'Oppo A9 2020', 'Oppo A92', 'Pc portable', 'Redmi 9', 'Redmi note 8', 'Redmi note 8 pro 64 giga', 'SAMSUNG 
-GALAXY A31 128Go/4Go', 'SAMSUNG S9 NOIR 64 Go avec Carte SD 16 Go', 'SUMSUNG J7 PRO comme', 'Samsang A10s 32 giga', 'Samsung', 'Samsung A30', 'Samsung A40', 'Samsung G5 6', 'Samsung Galaxy A03s 64Go 4Go RAM', 'Samsung Galaxy A12 128-4go', 'Samsung Galaxy A72 256/8Go', 'Samsung Galaxy J5 6', 'Samsung S20 plus', 'Samsung S7 edge', 'Samsung Z fold 3 noir ()', 'Samsung galaxy S20 Ultra 256go-12go', 'Samsung galaxy S20 plus 128go-8go', 'Samsung galaxy S21 5G 256-8go', 'Samsung galaxy Z Fold 3 5G', 'Samsung galaxy watch 4 44mm', 'Samsung s10 s10 plus 128G 8 ram état 9 livraison', 'Tecno Spark 7 pro', 'Tecno spark 2', 'Téléphone', 'Téléphone  8 Ram 64 Mp', 'Téléphone portable', 'Vitrine', 'Vivo y15', 'Watch GT2/Tab S7/iphone 13/note 20', 'Xiaomi 11 mi lite 5g', 'Xiaomi Mi 10', 'Xiaomi Mi 
-10T 128/8 GB  avec carton', 'Xiaomi Redmi Note 10', 'Xiaomi Redmi Note 8 Pro', 'Xiaomi Redmi note 9s', 'Xiaomi redmi 9', 'Zenfone 4', 'amazfit gts 2 mini', 'band 3', 'deux', 'huawei', 'huawei nova 7 256g 8g RAM 5G', 'huawei y9s 128 GB-6R', 'hwawi', 'iPhone 11 128Gb', 'iPhone 11 128Go', 'iPhone 11 128go', 'iPhone 11 128go couleur mauve', 'iPhone 11 Pro Max 256 go', 'iPhone 11 bleu', 'iPhone 11 
-etat batterie 90 stockage 64g', 'iPhone 12 128GB & pochette', 'iPhone 12 Pro', 'iPhone 12 Pro Max', 'iPhone 12 pro', 'iPhone 13  emballé et jamais', 'iPhone 13 Pro', 'iPhone 13 RED', 'iPhone 5', 'iPhone 6', 'iPhone 6 Plus GOLD', 'iPhone 6s Plus et iPad 2', 'iPhone 7', 'iPhone 7 32g', 'iPhone 7 32gb', 'iPhone 7 Plus', 'iPhone 7 Plus 128GB', 'iPhone 7 Plus 32GB', 'iPhone 8 64 Gb', 'iphone 11', 'iphone 11. 11 pro. 12', 'iphone 12 pro max', 'iphone 13 pro Max 128 G 256G', 'iphone 13 pro max', 'iphone 5 en vente', 'iphone 6', 'iphone 7', 'iphone 7 128 Gb', 'iphone 7 normal', 'iphone 7 plus', 'iphone 8 plus', 'iphone12', 'lot des cartes mères', 'mi 9', 'montre lokmat', 'nokia 1', 'not 10', 'note 10', 'note 10 plus', 'note10 lite', 'note4', 'oppo F9', 'redme 9', 'redmi 9', 'redmi note 9 pro', 'samsung', 'samsung A02 S  plastifié garantie 1ans', 'samsung galaxy m12 4gb 128gb', 'smartphone', 'smartphones Xiaomi', 'smartwatch', 'sumsung A71', 'tablette samsung', 'télé', 'un Huawei Y9S comme', 'xiaomi', 'xiomi Redmi not 10 128g 4g ram', 'Écran lcd iPhone 6 Plus']
+import tkinter as tk
+from tkinter import ttk 
+from tkinter import *
+import sqlalchemy as db
+from sqlalchemy import create_engine
+from sqlalchemy.sql import select
+
+app = tk.Tk() 
+app.geometry('200x100')
+
+labelTop = tk.Label(app, text = "Choose your favourite month")
+labelTop.grid(column=0, row=0)
+engine = create_engine('sqlite:///database.db')
+
+connection = engine.connect()
+metadata = db.MetaData()
+tabe_avito = db.Table('avito', metadata, autoload=True, autoload_with=engine)
+results = connection.execute(db.select([tabe_avito.columns.phone.distinct()]).order_by(db.asc(tabe_avito.columns.phone))).fetchall()
+list1 = []
+for i in results:
+    list1.append(i[0])
+comboExample = ttk.Combobox(app, values=list1)
+
+comboExample.grid(column=0, row=1)
+comboExample.current(1)
+
+var = StringVar()
+
+mylabel  = Label(app, textvariable=var, relief=RAISED)
+var.set("Total")
+mylabel.grid(column=0, row=2)
+    
+def showet(listresultat):
+    global mylabel
+    mylabel.destroy()
+    mylabel  = Label(app, textvariable=var, relief=RAISED)
+    var.set("\n".join(map(str, listresultat)))
+    mylabel.grid(column=0, row=2)
+          
+def show(event):
+    global mylabel
+    print(comboExample.current(), comboExample.get())
+    Query = connection.execute(select(tabe_avito).where(tabe_avito.columns.phone == comboExample.get()))
+    alll = Query.fetchall()
+    Query.close()
+    print("Totale : ", len(alll))
+    titreresult  = "Totale : "+str(len(alll))
+    print("---------------------------------")
+    alll.sort(key=lambda x: x[3])
+    varville = ""
+    listresult=[]
+    totalindex = 0
+    for idx, row in enumerate(alll, start=1):
+        if varville != str(row[3]) :
+            if totalindex > 0 :
+                listresult.insert(totalindex, ">>>>>>>> Totale : "+str(i)+"       <<<<<<<<<")
+                if prixnum>0 :
+                    listresult.insert(totalindex+1, ">>>>>> Prix Moyen : "+str(prixtph/prixnum)+"      <<<<<<<")
+            varville = str(row[3])
+            listresult.append(">>>>>>>>  Ville : "+varville+"       <<<<<<<<<")
+            totalindex = len(listresult)
+            print("---------------------------------")
+            print(varville)
+            i = 0
+            prixtph = 0
+            prixnum = 0
+        i += 1 
+        if row[4] > 0 :
+            prixtph += row[4]
+            prixnum += 1
+        titreresult = str(row[2])+" - "+str(row[4])+" - "+str(row[5])
+        listresult.append(str(i)+" : "+titreresult)
+        print(row)
+        if idx == len(alll) :
+            listresult.insert(totalindex, ">>>>>>>>    Totale : "+str(i)+"       <<<<<<<<<")
+            listresult.insert(totalindex+1, ">>>>>> Prix Moyen : "+str(prixtph/prixnum)+"      <<<<<<<")
+            
+    #showet(listresult)
+    print("---------------------------------")
+    print('\n'.join(map(str, listresult)))
+    app.update_idletasks ( )
+    w = mylabel.winfo_width()
+    h = mylabel.winfo_height()+comboExample.winfo_height()+labelTop.winfo_height()
+    app.minsize(width=w, height=h) 
+    
+comboExample.bind("<<ComboboxSelected>>", show)
+app.mainloop()

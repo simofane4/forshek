@@ -79,17 +79,17 @@ rgb(0, 0, 127)
             </property>
             <column>
                 <property name="text">
-                    <string>Titre</string>
-                </property>
-            </column>
-            <column>
-                <property name="text">
                     <string>ville</string>
                 </property>
             </column>
             <column>
                 <property name="text">
-                    <string>Prix</string>
+                    <string>nombre d'annonces</string>
+                </property>
+            </column>
+            <column>
+                <property name="text">
+                    <string> moyen de prix</string>
                 </property>
             </column>
             <column>

@@ -63,16 +63,3 @@ def add_to_db(annonces):
                 session.close()
                 
                 
-table = ModelAvito()
-table.phone = 'A'
-table.titre = 'A'
-table.ville= 'A'
-table.prix = "A"
-table.date='A'
-
-
-
-
-session.add(table)
-session.commit()
-session.close()

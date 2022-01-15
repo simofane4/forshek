@@ -74,7 +74,10 @@ class Fenetre(QDialog):
         
         
     def go_to_page3(self):
-        print("page3 clicked : ")
+        page3 = Page3()
+        widget.addWidget(page3)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+        
             
 class Page2(QDialog):
     def __init__(self):
@@ -91,6 +94,31 @@ class Page2(QDialog):
         main = Fenetre()
         widget.addWidget(main)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        
+        
+    def back_to_page3(self):
+        page3 = Page3()
+        widget.addWidget(page3)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+        
+        
+        
+class Page3(QDialog):
+    def __init__(self):
+        super(Page3, self).__init__()
+        loadUi('UI/page3.ui', self)
+        self.main.clicked.connect(self.back_to_main)
+        self.page2.clicked.connect(self.back_to_page2)
+        
+        
+    def back_to_main(self):
+        main = Fenetre()
+        widget.addWidget(main)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+    def back_to_page2(self):
+        page2 = Page2()
+        widget.addWidget(page2)
+        widget.setCurrentIndex(widget.currentIndex()+1)
 
 
 app = QApplication(sys.argv)
@@ -98,7 +126,6 @@ main = Fenetre()
 page2= Page2()
 widget = QtWidgets.QStackedWidget()
 widget.addWidget(main)
-widget.addWidget(page2)
 widget.setFixedHeight(650)
 widget.setFixedWidth(1000)
 widget.show()
